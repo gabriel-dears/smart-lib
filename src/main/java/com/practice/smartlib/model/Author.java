@@ -1,5 +1,7 @@
 package com.practice.smartlib.model;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,5 +20,8 @@ public class Author {
 
     private String name;
 
+    @CPF
+    private String cpf;
+    
     // Constructors, getters, setters, and other methods
 }

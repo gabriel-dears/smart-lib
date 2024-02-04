@@ -10,6 +10,7 @@ import com.practice.smartlib.repository.CategoryRepository;
 import com.practice.smartlib.utils.NumberUtils;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 
 @Service
 public class CategoryService {
@@ -39,6 +40,19 @@ public class CategoryService {
 
 	public List<Category> findAll() {
 		return repository.findAll();
+	}
+
+	public Category update(Long id, @Valid Category category) {
+
+		Category foundCategory = findById(id);
+		
+		foundCategory.setName(category.getName());
+		
+		return repository.save(foundCategory);
+	}
+
+	public void delete(Long id) {
+		repository.delete(findById(id));
 	}
 	
 }

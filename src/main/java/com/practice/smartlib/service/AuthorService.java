@@ -9,6 +9,7 @@ import com.practice.smartlib.model.Author;
 import com.practice.smartlib.repository.AuthorRepository;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 
 @Service
 public class AuthorService {
@@ -29,6 +30,20 @@ public class AuthorService {
 			throw new RuntimeException("Cpf already registered!");
 		}
 		return repository.save(dto);
+	}
+
+	public Author update(Long id, @Valid Author dto) {
+		
+		Author foundAuthor = findBydId(id);
+		
+		foundAuthor.setName(dto.getName());
+		foundAuthor.setCpf(dto.getCpf());
+		
+		return repository.save(foundAuthor);
+	}
+
+	public void delete(Long id) {
+		repository.delete(findBydId(id));
 	}
 	
 	

@@ -12,6 +12,8 @@ import com.practice.smartlib.model.Book;
 import com.practice.smartlib.model.Category;
 import com.practice.smartlib.repository.BookRepository;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class BookService {
 
@@ -46,8 +48,12 @@ public class BookService {
 		return createdDto;
 	}
 
-	public List<Book> findAll() {
-		return repository.findAll();
+	public List<BookDto> findAll() {
+		return repository.findAll().stream().map(item -> modelMapper.map(item, BookDto.class)).toList();
+	}
+
+	public Book findById(Long bookId) {
+		return repository.findById(bookId).orElseThrow(() -> new EntityNotFoundException());
 	}
 	
 }

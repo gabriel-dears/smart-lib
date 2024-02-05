@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.practice.smartlib.model.Borrowing;
+import com.practice.smartlib.dto.BorrowingDto;
 import com.practice.smartlib.service.BorrowingService;
 
 import jakarta.validation.Valid;
@@ -26,19 +26,19 @@ public class BorrowingController {
 	private BorrowingService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Borrowing>> findAll() {
+	public ResponseEntity<List<BorrowingDto>> findAll() {
 		return ResponseEntity.ok(service.findAll());
 	}
 	
 	@GetMapping("{id}")
-	public ResponseEntity<Borrowing> findById(@PathVariable Long id) {
+	public ResponseEntity<BorrowingDto> findById(@PathVariable Long id) {
 		return ResponseEntity.ok(service.findById(id));
 	}
 	
 	@PostMapping
-	public ResponseEntity<Borrowing> create(@Valid @RequestBody Borrowing borrowing, UriComponentsBuilder uriBuilder) {
+	public ResponseEntity<BorrowingDto> create(@Valid @RequestBody BorrowingDto borrowing, UriComponentsBuilder uriBuilder) {
 		
-		Borrowing createdBorrowing = service.create(borrowing);
+		BorrowingDto createdBorrowing = service.create(borrowing);
 		
 		URI path = uriBuilder.path("/borrowing/{id}").buildAndExpand(createdBorrowing.getId()).toUri();
 		

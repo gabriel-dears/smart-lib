@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.practice.smartlib.dto.BookDto;
-import com.practice.smartlib.model.Book;
 import com.practice.smartlib.service.BookService;
 
 import jakarta.validation.Valid;
@@ -25,7 +24,7 @@ public class BookController {
 	private BookService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Book>> findAll() {
+	public ResponseEntity<List<BookDto>> findAll() {
 		return ResponseEntity.ok(service.findAll());
 	}
 	

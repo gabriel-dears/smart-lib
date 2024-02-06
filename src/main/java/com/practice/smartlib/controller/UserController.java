@@ -36,4 +36,6 @@ public class UserController {
 		return ResponseEntity.created(uri).body(createdUser);
 	}
 	
+	// TODO: authentication
+	
 }

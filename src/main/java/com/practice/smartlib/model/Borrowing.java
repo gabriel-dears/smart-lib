@@ -3,6 +3,9 @@ package com.practice.smartlib.model;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import com.practice.smartlib.dto.BorrowingDto;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -43,4 +46,16 @@ public class Borrowing {
         borrowedBooks.remove(borrowedBook);
         borrowedBook.setBorrowing(null);
     }
+
+	public BorrowingDto toDto() {
+		BorrowingDto dto = new BorrowingDto();
+		
+		dto.setId(id);
+		dto.setUserId(user.getId());
+		dto.setBorrowDate(borrowDate);
+		dto.setReturnDate(returnDate);
+		dto.setBorrowedBooks(borrowedBooks.stream().map(BorrowedBook::toDto).collect(Collectors.toSet()));
+		
+		return dto;
+	}
 }

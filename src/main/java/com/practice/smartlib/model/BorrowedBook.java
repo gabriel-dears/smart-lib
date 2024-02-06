@@ -1,5 +1,7 @@
 package com.practice.smartlib.model;
 
+import com.practice.smartlib.dto.BorrowedBookDto;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,6 +26,19 @@ public class BorrowedBook {
 
     @ManyToOne
     private Borrowing borrowing;
+
+	public BorrowedBookDto toDto() {
+		BorrowedBookDto dto = new BorrowedBookDto();
+
+		dto.setId(id);
+		dto.setBookId(book.getId());
+		dto.setBookTitle(book.getTitle());
+		dto.setQuantity(quantity);
+		dto.setAuthorName(book.getAuthor().getName());
+		dto.setCategoryName(book.getCategory().getName());
+		
+		return dto;
+	}
 
     // Constructors, getters, setters, and other methods
 }

@@ -28,11 +28,17 @@ public class BookController {
 		return ResponseEntity.ok(service.findAll());
 	}
 	
+	// TODO: findById
+	
 	@PostMapping
 	public ResponseEntity<BookDto> insert(@Valid @RequestBody BookDto dto, UriComponentsBuilder uribBuilder) {
 		var createdDto = service.create(dto);
 		var path = uribBuilder.path("/book/{id}").buildAndExpand(createdDto.getId()).toUri();
 		return ResponseEntity.created(path).body(createdDto);
 	}
+	
+	// TODO: put
+	
+	// TODO: delete
 	
 }

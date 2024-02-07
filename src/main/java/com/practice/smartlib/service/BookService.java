@@ -55,5 +55,14 @@ public class BookService {
 	public Book findById(Long bookId) {
 		return repository.findById(bookId).orElseThrow(() -> new EntityNotFoundException());
 	}
+
+	public BookDto findByIdDto(Long id) {
+		return findById(id).toDto();
+	}
+
+	public void delete(Long id) {
+		findById(id);
+		repository.deleteById(id);
+	}
 	
 }

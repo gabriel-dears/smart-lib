@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +30,10 @@ public class BookController {
 		return ResponseEntity.ok(service.findAll());
 	}
 	
-	// TODO: findById
+	@GetMapping("{id}")
+	public ResponseEntity<BookDto> findById(@PathVariable Long id) {
+		return ResponseEntity.ok(service.findByIdDto(id));
+	}
 	
 	@PostMapping
 	public ResponseEntity<BookDto> insert(@Valid @RequestBody BookDto dto, UriComponentsBuilder uribBuilder) {
@@ -38,7 +43,11 @@ public class BookController {
 	}
 	
 	// TODO: put
+	// same structure as borrowing... create toDto() method
 	
-	// TODO: delete
+	@DeleteMapping("{id}")
+	public void delete(@PathVariable Long id) {
+		service.delete(id);
+	}
 	
 }

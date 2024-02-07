@@ -1,5 +1,7 @@
 package com.practice.smartlib.model;
 
+import com.practice.smartlib.dto.BookDto;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -37,4 +39,17 @@ public class Book {
             availableCopies = totalCopies;
         }
     }
+
+	public BookDto toDto() {
+		BookDto dto = new BookDto();
+		
+		dto.setId(id);
+		dto.setAuthorId(author.getId());
+		dto.setCategoryId(category.getId());
+		dto.setTitle(title);
+		dto.setTotalCopies(totalCopies);
+		dto.setAvailableCopies(availableCopies);
+		
+		return dto;
+	}
 }
